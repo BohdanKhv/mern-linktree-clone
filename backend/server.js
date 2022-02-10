@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // Router
 app.use('/api/links', require('./routes/linkRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 // Add error handler
 app.use(errorHandler)
