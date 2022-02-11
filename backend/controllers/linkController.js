@@ -1,11 +1,19 @@
 const asyncHandler = require('express-async-handler')
 const Link = require('../models/linkModel')
+const User = require('../models/userModel')
 
-// @desc    Get links
+// @desc    Get user links
 // @route   GET /api/links
 // @access  Private
 const getLinks = asyncHandler(async (req, res) => {
-    const links = await Link.find({})
+    const user = await User.findOne({ username: req.params.id })
+
+    if(!user) {
+        res.status(400)
+        throw new Error('That user does not exist')
+    }
+
+    const links = await Link.find({ user: user.id })
 
     res.status(200).json(links)
 })
@@ -24,6 +32,7 @@ const setLink = asyncHandler(async (req, res) => {
     }
 
     const link = await Link.create({
+        user: req.user.id,
         name: req.body.name,
         url: req.body.url,
         icon: req.body.icon,
@@ -43,6 +52,20 @@ const updateLink = asyncHandler(async (req, res) => {
         throw new Error('Link not found')
     }
 
+    const user = await User.findById(req.user.id)
+
+    // Check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Check if link user matcher logged in user
+    if(link.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
     const updatedLink = await Link.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
     res.status(200).json(updatedLink)
@@ -59,6 +82,20 @@ const deleteLink = asyncHandler(async (req, res) => {
         throw Error('Link not found')
     }
 
+    const user = await User.findById(req.user.id)
+
+    // Check for user
+    if(!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Check if link user matcher logged in user
+    if(link.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
     const deletedLink = await link.remove()
 
     res.status(200).json(deletedLink)
@@ -68,5 +105,5 @@ module.exports = {
     getLinks,
     setLink,
     updateLink,
-    deleteLink
+    deleteLink,
 }

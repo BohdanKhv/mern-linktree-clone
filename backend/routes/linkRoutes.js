@@ -4,10 +4,11 @@ const {
         getLinks, 
         setLink, 
         updateLink, 
-        deleteLink 
+        deleteLink,
     } = require('../controllers/linkController')
+const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').get(getLinks).post(setLink)
-router.route('/:id').put(updateLink).delete(deleteLink)
+router.route('/').post(protect, setLink)
+router.route('/:id').get(getLinks).put(protect, updateLink).delete(protect, deleteLink)
 
 module.exports = router
