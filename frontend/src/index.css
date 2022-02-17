@@ -77,9 +77,9 @@ h3 {
 }
 
 .heading {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 50px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 30px;
   padding: 0 20px;
 }
 
@@ -134,12 +134,45 @@ h3 {
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
+  font-size: 1rem;
 }
 
 .form-group label {
   text-align: left;
   display: block;
   margin: 0 0 5px 3px;
+}
+
+.form-group-username {
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  overflow: hidden;
+}
+
+.form-group-username:focus-within {
+  outline: 2px solid #000;
+}
+
+.form-group-username .pre-input {
+  padding: 10px 0 10px 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.form-group-username .form-control-username {
+  padding: 10px 10px 10px 0;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group-username .form-control-username:focus {
+  outline: none;
 }
 
 .btn {
@@ -149,7 +182,7 @@ h3 {
   background: #000;
   color: #fff;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
   appearance: button;
@@ -214,10 +247,10 @@ h3 {
   }
 
   .heading h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .heading p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 }

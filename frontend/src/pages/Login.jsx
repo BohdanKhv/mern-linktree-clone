@@ -1,30 +1,68 @@
 import { useState, useEffect } from "react"
 import { FaSignInAlt } from 'react-icons/fa'
+import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux'
+import { login, reset } from '../features/auth/authSlice'
+import { toast } from "react-toastify"
+import Spinner from "../components/Spinner"
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        username: '',
         password: ''
     })
 
-    const {name, password} = formData
+
+    const {username, password} = formData
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        if(isError) {
+            toast.error(message)
+        }
+        if(isSuccess || user) {
+            navigate('/')
+        }
+
+        dispatch(reset())
+
+    }, [user, isError, isSuccess, message, navigate, dispatch])
 
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
-            [e.target.name]: [e.target.value]
+            [e.target.name]: e.target.value
         }))
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+        if(username === '' || password === '') {
+            toast.error('Please all all fields')
+        } else {
+            const userData = {
+                username,
+                password
+            }
+
+            dispatch(login(userData))
+        }
+    }
+
+    if(isLoading) {
+        return <Spinner />
     }
 
     return (
         <>
-            <section className="headeing">
+            <section className="heading">
                 <h1 className="justify-center"><FaSignInAlt/> Login</h1>
-                <p>Please create an account</p>
+                <p>Please login using your credentials</p>
             </section>
             <section className="form">
                 <form onSubmit={onSubmit}>
@@ -32,10 +70,10 @@ const Login = () => {
                         <input 
                             type="text" 
                             className="form-control" 
-                            id="name"
-                            name="name" 
-                            value={name} 
-                            placeholder="linktree/ your username"
+                            id="username"
+                            name="username" 
+                            value={username} 
+                            placeholder="Username"
                             onChange={onChange}/>
                     </div>
                     <div className="form-group">
@@ -45,7 +83,7 @@ const Login = () => {
                             id="password"
                             name="password" 
                             value={password} 
-                            placeholder="password"
+                            placeholder="Password"
                             onChange={onChange}/>
                     </div>
                     <div className="form-group">
