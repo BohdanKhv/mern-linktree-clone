@@ -52,16 +52,14 @@ const updateLink = asyncHandler(async (req, res) => {
         throw new Error('Link not found')
     }
 
-    const user = await User.findById(req.user.id)
-
     // Check for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     // Check if link user matcher logged in user
-    if(link.user.toString() !== user.id) {
+    if(link.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -82,16 +80,14 @@ const deleteLink = asyncHandler(async (req, res) => {
         throw Error('Link not found')
     }
 
-    const user = await User.findById(req.user.id)
-
     // Check for user
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     // Check if link user matcher logged in user
-    if(link.user.toString() !== user.id) {
+    if(link.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }

@@ -16,10 +16,19 @@ const Header = () => {
 
     return (
         <header className='header'>
-            <div className="logo">
-                <Link to='/'>LinkTree</Link>
+            <div>
+                <ul className='left'>
+                    <li className='logo'>
+                        <Link to={`/${user ? user.username : ''}`}>LinkTree</Link>
+                    </li>
+                    {user &&
+                        <li>
+                            <Link to='/admin'>Dashboard</Link>
+                        </li>
+                    }
+                </ul>
             </div>
-            <ul>
+            <ul className='right'>
                 {user ? 
                 (
                     <li>

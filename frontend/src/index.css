@@ -52,13 +52,22 @@ h3 {
   margin-bottom: 60px;
 }
 
+.header ul.left li {
+  margin-right: 20px;
+}
+
+.header ul.left li.logo a {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 .header ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.header ul li {
+.header ul.right li {
   margin-left: 20px;
 }
 
