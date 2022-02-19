@@ -130,6 +130,21 @@ h3 {
   margin: 0 auto;
 }
 
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row .form-w-75 {    
+  width: 100%;
+}
+
+.form-row .form-w-25 {
+  width: 40%;
+  margin-right: 10px;
+}
+
+
 .form-group {
   margin-bottom: 10px;
 }

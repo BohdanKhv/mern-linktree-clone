@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import LinkForm from "../components/LinkForm"
 
 const Admin = () => {
 
@@ -19,6 +20,7 @@ const Admin = () => {
                 <h1>Welcome {user && user.username}</h1>
                 <p>Dashboard</p>
             </section>
+            <LinkForm />
         </>
     )
 }

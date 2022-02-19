@@ -26,13 +26,14 @@ const setLink = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please add a name field')
     }
-    if (!req.body.url) {
+    if ((!req.body.type || req.body.type === 'url') && !req.body.url) {
         res.status(400)
         throw new Error('Please add a url field')
     }
 
     const link = await Link.create({
         user: req.user.id,
+        type: req.body.type,
         name: req.body.name,
         url: req.body.url,
         icon: req.body.icon,
