@@ -81,15 +81,30 @@ const generateToken = (id) => {
     })
 }
 
-// @desc    Get user data
+// @desc    Get admin data
 // @route   GET /api/users/admin
 // @access  Private
 const getAdmin = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
 })
 
+// @desc    Get user data
+// @route   GET /api/users/:id
+// @access  Public
+const getUser = asyncHandler(async (req, res) => {
+    const user = await User.findOne({username: req.params.id})
+
+    if(!user) {
+        res.status(400)
+        throw new Error('That user does not exist')
+    }
+
+    res.status(200).json(user)
+})
+
 module.exports = {
     registerUser,
     loginUser,
     getAdmin,
+    getUser
 }

@@ -9,16 +9,53 @@ const userSchema = mongoose.Schema({
     fullName: {
         type: String,
         required: false,
-        default: ''
+        default: null
     },
     email: {
         type: String,
         required: false,
-        default: ''
+        default: null
     },
     password: {
         type: String,
         required: [true, 'Please add a password']
+    },
+    profileImage: {
+        type: String,
+        required: false,
+        default: null
+    },
+    pageStyle: {
+        backgroudImage: {
+            type: String,
+            required: false,
+            default: null
+        },
+        backgroundColor: {
+            type: String,
+            required: false,
+            default: '#ffffff'
+        },
+        borderRadius: {
+            type: String,
+            required: false,
+            default: '5px'
+        },
+        fontSize: {
+            type: String,
+            required: false,
+            default: '18px'
+        },
+        fontColor: {
+            type: String,
+            required: false,
+            default: 'black'
+        },
+        fontWeight: {
+            type: String,
+            required: false,
+            default: '400'
+        }
     }
 }, {
     timestamps: true

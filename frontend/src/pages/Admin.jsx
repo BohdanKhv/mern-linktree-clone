@@ -20,9 +20,9 @@ const Admin = () => {
 
         if(!user) {
             navigate('/login')
+        } else {
+            dispatch(getLinks(user.username))
         }
-
-        dispatch(getLinks(user.username))
 
         return () => {
             dispatch(reset())

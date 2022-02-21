@@ -25,6 +25,20 @@ const linkSchema = mongoose.Schema({
     icon: {
         type: String,
         required: false
+    },
+    orderKey: {
+        type: Number,
+        required: false
+    },
+    viewCount: {
+        type: Number,
+        default: 0,
+        required: false
+    },
+    clickCount: {
+        type: Number,
+        default: 0,
+        required: false
     }
 }, {
     timestamps: true

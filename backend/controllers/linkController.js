@@ -3,7 +3,7 @@ const Link = require('../models/linkModel')
 const User = require('../models/userModel')
 
 // @desc    Get user links
-// @route   GET /api/links
+// @route   GET /api/links/:id
 // @access  Private
 const getLinks = asyncHandler(async (req, res) => {
     const user = await User.findOne({ username: req.params.id })

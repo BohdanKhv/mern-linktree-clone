@@ -88,7 +88,7 @@ const Register = () => {
                             onChange={onChange}/>
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-block" type="submit">Submit</button>
+                        <button className="btn btn-block" type="submit">Register</button>
                     </div>
                 </form>
             </section>
