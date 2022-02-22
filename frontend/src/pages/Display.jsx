@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { profileSlice, getProfile } from '../features/profile/profileSlice'
 import { linkSlice, getLinks } from '../features/links/linkSlice'
 import Spinner from '../components/Spinner'
-import AdminLink from '../components/AdminLink'
+import LinkBtn from '../components/LinkBtn'
 import { toast } from "react-toastify"
 
 const Dashboard = () => {
@@ -49,7 +49,7 @@ const Dashboard = () => {
                 </>
                 }
                 {links && links.map((link, index) => {
-                    return <AdminLink key={`Display-link-${index}`} link={link}/>
+                    return <LinkBtn key={`Display-link-${index}`} link={link}/>
                 })}
             </section>
         </>

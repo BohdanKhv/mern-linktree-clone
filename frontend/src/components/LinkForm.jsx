@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { createLink, reset } from '../features/links/linkSlice'
+import IconSelect from "./IconSelect"
 
 export const LinkForm = () => {
 
@@ -11,6 +12,7 @@ export const LinkForm = () => {
         type: 'url',
         icon: ''
     })
+    const [displayIconSelect, setDisplayIconSelect] = useState(false)
 
     const { name, url, type, icon } = formData
 
@@ -73,28 +75,19 @@ export const LinkForm = () => {
                 </div>
                 {type === 'url' &&
                 <>
-                <div className="form-group">
-                    <label htmlFor="text">URL</label>
-                    <input 
-                        type="text" 
-                        name="url" 
-                        id="url" 
-                        value={url} 
-                        onChange={onChange}
-                        placeholder="https://www.youtube.com/channel/JohnDoe"
-                    />
-                </div>
                     <div className="form-group">
-                        <label htmlFor="text">Icon</label>
+                        <label htmlFor="text">URL</label>
                         <input 
                             type="text" 
-                            name="icon" 
-                            id="icon" 
-                            value={icon} 
+                            name="url" 
+                            id="url" 
+                            value={url} 
                             onChange={onChange}
-                            placeholder="&#128075;"
+                            placeholder="https://www.youtube.com/channel/JohnDoe"
                         />
                     </div>
+                    <a className="btn btn-block" onClick={() => {setDisplayIconSelect(true)}}>Add Icon</a>
+                    {displayIconSelect && <IconSelect setDisplayIconSelect={setDisplayIconSelect}/> }
                 </>
                 }
                 <div className="form-group">

@@ -11,5 +11,5 @@ PORT = your port
 MONGO_URI = your db
 JWT_TOKEN = your jwt tocken
 ```
-```npm start server```
+```npm run server```
 ```npm run client```

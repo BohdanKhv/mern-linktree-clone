@@ -126,7 +126,7 @@ h3 {
 
 .form,
 .content,
-.admin-link {
+.display-link {
   width: 70%;
   margin: 0 auto;
 }
@@ -200,6 +200,73 @@ h3 {
   outline: none;
 }
 
+.icon-select-overlay {    
+  position: fixed;
+  inset: 0px;
+  z-index: 99999;
+  background-color: rgba(10, 11, 13, 0.6);
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 16px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.icon-select-overlay .icon-select-wrapper {
+  background-color: rgb(255, 255, 255);
+  padding: 32px 24px 24px;
+  position: relative;
+  border-radius: 16px;
+  height: calc(100vh - 32px);
+  width: calc(100vw - 32px);
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+}
+
+.icon-select-overlay .icon-select-wrapper .close {
+  padding: 0px 7px;
+  color: #ffffff;
+  margin: 0px;
+  border: none;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  background: none rgb(10, 11, 13);
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  appearance: none;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.icon-select-overlay .icon-select-wrapper .icons-container {
+  height: 100%;
+}
+
+.icon-select-overlay .icon-select-wrapper .icons-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 8px;
+}
+
+.icon-select-overlay .icon-select-wrapper .icons-grid .select-icon {
+  width: 63px;
+  height: 63px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .btn {
   padding: 10px 20px;
   border: 1px solid #000;
@@ -262,7 +329,7 @@ h3 {
   margin-top: 50px;
 }
 
-.admin-link {
+.display-link {
   background-color: #ffffff;
   border: 5px solid #000;
   border-radius: 5px;
@@ -271,24 +338,50 @@ h3 {
   position: relative;
 }
 
-.admin-link a {
+.display-link a {
   padding: 15px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-.admin-link:hover {
+.display-link:hover {
   background-color: #e6e6e6;
   border: 5px solid #e6e6e6;
 }
 
-.admin-link .icon {
-  left: 15px;
+.display-link .icon {
   position: absolute;
-  font-size: 1.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  left: 8px;
 }
 
-.admin-link .name {
+.display-link .name {
   font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.25rem;
+}
+
+.display-text {
+  margin-top: 15px;
+}
+
+.display-text p {
+  font-size: 1.30rem;
   font-weight: 500;
   letter-spacing: 0.25rem;
 }
@@ -304,7 +397,7 @@ h3 {
 
 @media (max-width: 600px) {
   .form,
-  .admin-link {
+  .display-link {
     width: 90%;
   }
 

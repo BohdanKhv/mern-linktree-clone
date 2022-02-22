@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header';
 import Main from './pages/Main';
-import Dashboard from './pages/Dashboard';
+import Display from './pages/Display';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,7 +16,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={<Main/>} />
-          <Route path='/:id' element={<Dashboard/>} />
+          <Route path='/:id' element={<Display/>} />
           <Route path='/admin' element={<Admin/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
