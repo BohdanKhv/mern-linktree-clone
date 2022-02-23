@@ -40,9 +40,16 @@ const Dashboard = () => {
 
     return (
         <>
-            <section className='heading'>
-                <h1>{user && `@${user.username}`}</h1>
-                {message && message === 'That user does not exist' && 
+            <section className='display heading'>
+                <div className="profile">
+                    <div className="username-img-container">
+                        <div className="username-img-bg">
+                            <span>{user && user.username.slice(0,1).toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <h1>{user && `@${user.username}`}</h1>
+                </div>
+                    {message && message === 'That user does not exist' && 
                 <>
                     <h1>{message}</h1>
                     <h6><Link to="/register">Click here to register using "{params.id}" username!</Link></h6>

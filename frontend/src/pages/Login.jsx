@@ -59,7 +59,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className="login">
             <section className="heading">
                 <h1 className="justify-center"><FaSignInAlt/> Login</h1>
                 <p>Please login using your credentials</p>
@@ -91,7 +91,7 @@ const Login = () => {
                     </div>
                 </form>
             </section>
-        </>
+        </div>
     )
 }
 

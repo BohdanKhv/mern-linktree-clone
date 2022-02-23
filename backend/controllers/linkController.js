@@ -13,7 +13,7 @@ const getLinks = asyncHandler(async (req, res) => {
         throw new Error('That user does not exist')
     }
 
-    const links = await Link.find({ user: user.id })
+    const links = await Link.find({ user: user.id }).sort({"orderKey": 1}).exec()
 
     res.status(200).json(links)
 })
@@ -37,6 +37,7 @@ const setLink = asyncHandler(async (req, res) => {
         name: req.body.name,
         url: req.body.url,
         icon: req.body.icon,
+        orderKey: req.body.orderKey
     })
 
     res.status(200).json(link)

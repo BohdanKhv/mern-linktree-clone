@@ -28,6 +28,7 @@ const linkSchema = mongoose.Schema({
     },
     orderKey: {
         type: Number,
+        default: 0,
         required: false
     },
     viewCount: {

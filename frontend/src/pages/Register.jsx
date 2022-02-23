@@ -57,7 +57,7 @@ const Register = () => {
     }
 
     return (
-        <>
+        <div className="register">
             <section className="heading">
                 <h1><FaUser/> Register</h1>
                 <p>Please create an account</p>
@@ -92,7 +92,7 @@ const Register = () => {
                     </div>
                 </form>
             </section>
-        </>
+        </div>
     )
 }
 

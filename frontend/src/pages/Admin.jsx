@@ -34,12 +34,12 @@ const Admin = () => {
     }
 
     return (
-        <>
+        <div className="admin">
             <section className='heading'>
                 <h1>Welcome {user && user.username}</h1>
                 <p>Dashboard</p>
             </section>
-            <LinkForm />
+            <LinkForm linkCount={links.length}/>
             <section className="admin-body">
                 {
                     links.map((link, index) => {
@@ -47,7 +47,7 @@ const Admin = () => {
                     })
                 }
             </section>
-        </>
+        </div>
     )
 }
 
