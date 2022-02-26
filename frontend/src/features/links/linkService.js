@@ -17,7 +17,7 @@ const createLink = async (linkData, token) => {
 
 // Get user links
 const getLinks = async (username) => {
-    const response = await axios.get(API_URL + username)
+    const response = await axios.get(API_URL + 'user/' + username)
 
     return response.data
 }

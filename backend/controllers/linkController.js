@@ -2,10 +2,10 @@ const asyncHandler = require('express-async-handler')
 const Link = require('../models/linkModel')
 const User = require('../models/userModel')
 
-// @desc    Get user links
-// @route   GET /api/links/:id
-// @access  Private
-const getLinks = asyncHandler(async (req, res) => {
+// @desc    Get all links for user
+// @route   GET /api/links/user/:id
+// @access  Public
+const getUserLinks = asyncHandler(async (req, res) => {
     const user = await User.findOne({ username: req.params.id })
 
     if(!user) {
@@ -16,6 +16,32 @@ const getLinks = asyncHandler(async (req, res) => {
     const links = await Link.find({ user: user.id }).sort({"orderKey": 1}).exec()
 
     res.status(200).json(links)
+})
+
+// @desc    Get one link
+// @route   GET /api/links/:id
+// @access  Public
+const getLink = asyncHandler(async (req, res) => {
+    const link = await Link.findById(req.params.id)
+
+    if(!link) {
+        res.status(400)
+        throw new Error('Link not found')
+    }
+
+    // Check for user
+    if(!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Check if link user matcher logged in user
+    if(link.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    res.status(200).json(link)
 })
 
 // @desc    Create link
@@ -100,7 +126,8 @@ const deleteLink = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getLinks,
+    getLink,
+    getUserLinks,
     setLink,
     updateLink,
     deleteLink,

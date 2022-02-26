@@ -4,14 +4,14 @@ import { toast } from 'react-toastify'
 import { createLink, reset } from '../features/links/linkSlice'
 import IconSelect from "./IconSelect"
 
-export const LinkForm = ({ linkCount }) => {
+export const LinkForm = ({ linkCount, link }) => {
 
     const [formData, setFormData] = useState({
-        name: '',
-        url: '',
-        type: 'url',
+        name: link ? link.name : '',
+        url: link ? link.url : '',
+        type: link ? link.type : 'url',
     })
-    const [iconValue, setIconValue] = useState('')
+    const [iconValue, setIconValue] = useState( link ? link.icon : '')
 
     const [displayIconSelect, setDisplayIconSelect] = useState(false)
 
@@ -38,7 +38,7 @@ export const LinkForm = ({ linkCount }) => {
                 icon: '',
             }))
         } else {
-            toast.error('Please all all fields')
+            toast.error('Please add all fields')
         }
 
     }
@@ -56,7 +56,7 @@ export const LinkForm = ({ linkCount }) => {
                 <div className="form-row">
                     <div className="form-group form-w-25">
                         <label htmlFor="text">Type</label>
-                        <select name="type" id="type" onChange={onChange}>
+                        <select name="type" id="type" value={type} onChange={onChange}>
                             <option value="url">URL</option>
                             <option value="text">Text</option>
                         </select>
@@ -101,7 +101,7 @@ export const LinkForm = ({ linkCount }) => {
                 </>
                 }
                 <div className="form-group">
-                    <input type="submit" className="btn" value={`Add ${type}`} />
+                    <input type="submit" className="btn" value={`${link ? 'Edit ': 'Add '} ${type}`} />
                 </div>
             </form>
             {displayIconSelect && <IconSelect setDisplayIconSelect={setDisplayIconSelect} setIconValue={setIconValue}/> }

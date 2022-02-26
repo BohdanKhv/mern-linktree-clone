@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { getLinks, reset } from "../features/links/linkSlice"
 import LinkForm from "../components/LinkForm"
-import LinkBtn from "../components/LinkBtn"
+import AdminLink from "../components/AdminLink"
 import Spinner from '../components/Spinner'
 
 const Admin = () => {
@@ -36,14 +36,14 @@ const Admin = () => {
     return (
         <div className="admin">
             <section className='heading'>
-                <h1>Welcome {user && user.username}</h1>
-                <p>Dashboard</p>
+                <h1>@{user && user.username}</h1>
+                {/* <p>Dashboard</p> */}
             </section>
             <LinkForm linkCount={links.length}/>
             <section className="admin-body">
                 {
                     links.map((link, index) => {
-                        return <LinkBtn key={`Admin-links-${index}`} link={link}/>
+                        return <AdminLink key={`Admin-links-${index}`} link={link}/>
                     })
                 }
             </section>
