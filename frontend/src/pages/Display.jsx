@@ -52,12 +52,17 @@ const Dashboard = () => {
                     {message && message === 'That user does not exist' && 
                 <>
                     <h1>{message}</h1>
-                    <h6><Link to="/register">Click here to register using "{params.id}" username!</Link></h6>
+                    <h6><Link to="/register">👋 Please, click here to register using "{params.id}" username!</Link></h6>
                 </>
                 }
                 {links && links.map((link, index) => {
                     return <LinkBtn key={`Display-link-${index}`} link={link}/>
                 })}
+                {links && user && links.length === 0 &&
+                    <h6>
+                        😿 No links, yet
+                    </h6>
+                }
             </section>
         </>
     )

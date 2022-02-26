@@ -115,9 +115,9 @@
 }
 
 @media (max-width: 600px) {
-
     .admin-link-container {
-        width: 90%!important;
+        width: 100%!important;
+        padding: 23px 5%!important;
     }
 
     .collapse {
