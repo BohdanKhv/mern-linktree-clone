@@ -2,6 +2,8 @@
 
 :root {
   --box-shadow: 0 12px 13px rgba(0, 0, 0, .25);
+  --gray: #e6e6e6;
+  --active-gray: #7e7e7e;
 }
 
 * {
@@ -52,7 +54,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid var(--gray);
 }
 
 .header ul.left li {
@@ -188,7 +190,7 @@ h3 {
 
 .btn-icon {
   padding: 10px 20px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--gray);
   border-radius: 5px;
   background-color: #ffffff;
   color: #000;
@@ -207,7 +209,7 @@ h3 {
 
 .form-group-username {
   width: 100%;
-  /* border: 1px solid #e6e6e6; */
+  /* border: 1px solid var(--gray); */
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;
@@ -256,6 +258,16 @@ h3 {
   box-shadow: var(--box-shadow);
 }
 
+.btn-danger {
+  border: none;
+  background: #f35e5e;
+}
+
+.btn-warning {
+  background: #ffc815;
+  color: #000;
+}
+
 .btn svg {
   margin-right: 8px;
 }
@@ -298,8 +310,7 @@ h3 {
 }
 
 .login,
-.register,
-.admin {
+.register {
   padding: 50px 0;
 }
 
@@ -309,7 +320,7 @@ h3 {
 
 .display-link {
   background-color: #ffffff;
-  border: 5px solid #e6e6e6;
+  border: 5px solid var(--gray);
   height: 85px;
   border-radius: 5px;
   transition: 0.3s;
@@ -331,8 +342,8 @@ h3 {
 }
 
 .display-link:hover {
-  background-color: #e6e6e6;
-  border: 5px solid #e6e6e6;
+  background-color: var(--gray);
+  border: 5px solid var(--gray);
 }
 
 .display-text {
@@ -377,37 +388,71 @@ h3 {
   text-decoration: underline;
 }
 
-.display .username-img-container {
+.display .username-img-container,
+.admin .username-img-container {
   justify-content: center;
   align-items: center;
 }
 
-.display .profile {
+.display .profile,
+.admin .profile{
   margin-top: 50px;
   margin-bottom: 25px;
 }
-.display .profile h1 {
-  text-shadow: #e6e6e6 5px 5px 3px;
+
+.display .profile h1,
+.admin .profile h1 {
+  text-shadow: var(--gray) 5px 5px 3px;
   color: #000000;
   margin-top: 20px;
 }
 
-.display .username-img-bg {
+.display .username-img-bg,
+.admin .username-img-bg {
+  background-color: wheat;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 80px;
   height: 80px;
   min-width: 80px;
   min-height: 80px;
-  background-color: wheat;
   border-radius: 40px;
   margin: 0 5px;
   display: flex;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
   align-items: center;
+  box-shadow: var(--box-shadow);
 }
 
-.display .username-img-bg span {
+.profile .username-img-bg small {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+.profile .username-img-bg small:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.display .username-img-bg span,
+.admin .username-img-bg span {
   font-size: 2.5rem;
 }
 

@@ -47,6 +47,44 @@ export const getLinks = createAsyncThunk(
     }
 )
 
+// Edit link
+export const editLink = createAsyncThunk(
+    'links/edit',
+    async(linkData, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await linkService.editLink(linkData, token)
+        } catch (error) {
+            const message = 
+                (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message || 
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+// Delete link
+export const deleteLink = createAsyncThunk(
+    'links/delete',
+    async(id, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await linkService.deleteLink(id, token)
+        } catch (error) {
+            const message = 
+                (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message || 
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 export const linkSlice = createSlice({
     name: 'links',
     initialState,
@@ -79,6 +117,35 @@ export const linkSlice = createSlice({
             state.links = action.payload
         })
         .addCase(getLinks.rejected, (state, action) => {
+            state.isError = true
+            state.isLoading = false
+            state.message = action.payload
+        })
+        .addCase(editLink.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(editLink.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.links[state.links.findIndex((item) => item._id === action.payload._id)] = action.payload
+            state.links = state.links.sort((a,b) => a.orderKey - b.orderKey)
+        })
+        .addCase(editLink.rejected, (state, action) => {
+            state.isError = true
+            state.isLoading = false
+            state.message = action.payload
+        })
+        .addCase(deleteLink.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(deleteLink.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isError = false
+            state.isSuccess = true
+            state.links = state.links.filter(item => item._id !== action.payload._id)
+        })
+        .addCase(deleteLink.rejected, (state, action) => {
             state.isError = true
             state.isLoading = false
             state.message = action.payload

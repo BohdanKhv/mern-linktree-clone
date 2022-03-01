@@ -29,10 +29,28 @@ const login = async (userData) => {
     return response.data
 }
 
+// Edit user
+const editUser = async (userData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }
+
+    const response = await axios.put(API_URL, userData, config)
+
+    if(response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
+    }
+
+    return response.data
+}
+
 const authService = {
     register,
     logout,
-    login
+    login,
+    editUser
 }
 
 export default authService

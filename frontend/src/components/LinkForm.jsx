@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { createLink, reset } from '../features/links/linkSlice'
+import { createLink, reset, editLink, deleteLink } from '../features/links/linkSlice'
 import IconSelect from "./IconSelect"
 
 export const LinkForm = ({ linkCount, link }) => {
@@ -15,9 +15,18 @@ export const LinkForm = ({ linkCount, link }) => {
 
     const [displayIconSelect, setDisplayIconSelect] = useState(false)
 
-    const { name, url, type, icon } = formData
+    const { name, url, type } = formData
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        setFormData({
+            name: link ? link.name : '',
+            url: link ? link.url : '',
+            type: link ? link.type : 'url',
+        })
+        setIconValue( link ? link.icon : '')
+    }, [link])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -25,18 +34,23 @@ export const LinkForm = ({ linkCount, link }) => {
         if (name !== '' && ((type === 'url' && url !== '') || type === 'text')) {
             const linkData = {
                 name,
-                url,
+                url: type === 'text' ? '' : url,
                 type,
-                icon: iconValue,
-                orderKey: linkCount
+                icon: type === 'text' ? '' : iconValue,
+                orderKey: linkCount,
             }
-            dispatch(createLink(linkData))
-            setFormData((prevState) => ({
-                ...prevState,
-                name: '',
-                url: '',
-                icon: '',
-            }))
+            if(link) {
+                linkData['id'] = link._id
+                dispatch(editLink(linkData))
+            } else {
+                dispatch(createLink(linkData))
+                setFormData((prevState) => ({
+                    ...prevState,
+                    name: '',
+                    url: '',
+                    icon: '',
+                }))
+            }
         } else {
             toast.error('Please add all fields')
         }
@@ -64,6 +78,7 @@ export const LinkForm = ({ linkCount, link }) => {
                     <div className="form-group form-w-75">
                         <label htmlFor="text">Name</label>
                         <input 
+                            autoComplete="off"
                             type="text" 
                             name="name" 
                             id="name" 
@@ -89,6 +104,7 @@ export const LinkForm = ({ linkCount, link }) => {
                         <div className="form-group form-w-75">
                             <label htmlFor="text">URL</label>
                             <input 
+                                autoComplete="off"
                                 type="text" 
                                 name="url" 
                                 id="url" 
@@ -100,9 +116,24 @@ export const LinkForm = ({ linkCount, link }) => {
                     </div>
                 </>
                 }
-                <div className="form-group">
-                    <input type="submit" className="btn" value={`${link ? 'Edit ': 'Add '} ${type}`} />
-                </div>
+                {link ? 
+                    <div className="form-row">
+                        <div className="form-group form-w-25">
+                            <div className="form-group">
+                                <a onClick={() => dispatch(deleteLink(link._id))} className="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                        <div className="form-group form-w-75">
+                            <div className="form-group">
+                                <input type="submit" className="btn btn-warning" value={`Edit ${type}`} />
+                            </div>
+                        </div>
+                    </div>
+                :
+                    <div className="form-group">
+                        <input type="submit" className="btn" value={`${link ? 'Edit ': 'Add '} ${type}`} />
+                    </div>
+                }
             </form>
             {displayIconSelect && <IconSelect setDisplayIconSelect={setDisplayIconSelect} setIconValue={setIconValue}/> }
         </section>

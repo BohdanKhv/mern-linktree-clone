@@ -15,6 +15,33 @@ const createLink = async (linkData, token) => {
     return response.data
 }
 
+// Edit link
+const editLink = async (linkData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }
+
+    const response = await axios.put(API_URL + linkData.id, linkData, config)
+
+    return response.data
+}
+
+// Delete link
+const deleteLink = async (linkId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }
+
+    const response = await axios.delete(API_URL + linkId, config)
+
+    return response.data
+}
+
+
 // Get user links
 const getLinks = async (username) => {
     const response = await axios.get(API_URL + 'user/' + username)
@@ -24,7 +51,9 @@ const getLinks = async (username) => {
 
 const linkService = {
     createLink,
-    getLinks
+    getLinks,
+    editLink,
+    deleteLink
 }
 
 export default linkService

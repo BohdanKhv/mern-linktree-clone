@@ -23,13 +23,13 @@ const userSchema = mongoose.Schema({
     profileImage: {
         type: String,
         required: false,
-        default: null
+        default: ''
     },
     pageStyle: {
         backgroudImage: {
             type: String,
             required: false,
-            default: null
+            default: ''
         },
         backgroundColor: {
             type: String,

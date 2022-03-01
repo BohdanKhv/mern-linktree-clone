@@ -66,6 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             username: user.username,
             email: user.email,
+            profileImage: user.profileImage,
             token: generateToken(user._id)
         })
     } else {
@@ -102,9 +103,37 @@ const getUser = asyncHandler(async (req, res) => {
     res.status(200).json(user)
 })
 
+// @desc    Update user profile
+// @route   PUT /api/users
+// @access  Private
+const editUser = asyncHandler(async (req, res) => {
+    // Check for user
+    if(!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    await User.findByIdAndUpdate(req.user, req.body)
+    const user = await User.findById(req.user)
+
+    if(user) {
+        res.status(200).json({
+            _id: user.id,
+            username: user.username,
+            email: user.email,
+            profileImage: user.profileImage,
+            token: req.headers.authorization.split(' ')[1]
+        })
+    } else {
+        res.status(400)
+        throw new Error('Something went wrong')
+    }
+})
+
 module.exports = {
     registerUser,
     loginUser,
     getAdmin,
-    getUser
+    getUser,
+    editUser
 }

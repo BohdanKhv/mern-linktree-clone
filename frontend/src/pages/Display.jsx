@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { profileSlice, getProfile } from '../features/profile/profileSlice'
 import { linkSlice, getLinks } from '../features/links/linkSlice'
 import Spinner from '../components/Spinner'
+import ShareBtn from '../components/ShareBtn'
 import LinkBtn from '../components/LinkBtn'
 import { toast } from "react-toastify"
 
@@ -13,8 +14,8 @@ const Dashboard = () => {
     const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()
-    const { user, isError, isLoading, message } = useSelector((state) => state.profile )
-    const { links } = useSelector((state) => state.links )
+    const { user, isError, message } = useSelector((state) => state.profile )
+    const { links, isLoading } = useSelector((state) => state.links )
 
     useEffect(() => {
         if(!params.id) {
@@ -40,11 +41,14 @@ const Dashboard = () => {
 
     return (
         <>
-            <section className='display heading'>
+        <section className='display heading'>
                 <div className="profile">
                     <div className="username-img-container">
-                        <div className="username-img-bg">
-                            <span>{user && user.username.slice(0,1).toUpperCase()}</span>
+                        {user && user.username && <ShareBtn username={user.username} /> }
+                        <div className="username-img-bg" style={{backgroundImage: `url(${user && user.profileImage !== '' && user.profileImage})`}}>
+                            { user && user.profileImage === '' &&
+                                <span>{user && user.username.slice(0,1).toUpperCase()}</span>
+                            }
                         </div>
                     </div>
                     <h1>{user && `@${user.username}`}</h1>
