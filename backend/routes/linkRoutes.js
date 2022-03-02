@@ -9,8 +9,8 @@ const {
     } = require('../controllers/linkController')
 const { protect } = require('../middleware/authMiddleware')
 
-router.route('/').post(protect, setLink)
+router.route('/').post(protect, setLink).put(protect, updateLink)
 router.route('/user/:id').get(getUserLinks)
-router.route('/:id').get(protect, getLink).put(protect, updateLink).delete(protect, deleteLink)
+router.route('/:id').get(protect, getLink).delete(protect, deleteLink)
 
 module.exports = router

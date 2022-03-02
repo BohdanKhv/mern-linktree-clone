@@ -17,40 +17,36 @@ const Admin = () => {
     let { links, isError, message } = useSelector((state) => state.links)
     
 
-    // const reorder = (list, startIndex, endIndex) => {
-    //     const result = Array.from(list);
-    //     const [removed] = result.splice(startIndex, 1);
-    //     result.splice(endIndex, 0, removed);
-    //     return result;
-    // };
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+        links = result
+        return result;
+    };
 
-    function onDragEnd(result) {
-        // `destination` is `undefined` if the item was dropped outside the list
-        // In this case, do nothing
+    const onDragEnd = async (result) => {
         if (!result.destination) {
             return;
         }
 
-        // const items = reorder(
-        //     links,
-        //     result.source.index,
-        //     result.destination.index
-        // );
-        
-        const linkDataSource = {
-            orderKey: result.source.index,
-            id: links[result.destination.index]._id
-        }
-        const linkDataDestination = {
-            orderKey: result.destination.index,
-            id: links[result.source.index]._id
-        }
-
-        dispatch(editLink(linkDataSource))
-        dispatch(editLink(linkDataDestination))
-
+        reorder(
+            links,
+            result.source.index,
+            result.destination.index
+        );
         setIsDragging(false)
-        // links = items
+
+        // await new Promise((resolve) => {
+        //     setTimeout(() => resolve(), 1000);
+        // });
+
+        const data = links.map((item, index) => ({
+            _id: item._id,
+            orderKey: index
+        }));
+        dispatch(editLink(data))
+
     }
 
     useEffect(() => {
@@ -65,10 +61,9 @@ const Admin = () => {
         }
 
         return () => {
-            dispatch(reset())
+            // dispatch(reset())
         }
     }, [user, navigate, isError, message, dispatch])
-
 
     if(isLoading) {
         return <Spinner />

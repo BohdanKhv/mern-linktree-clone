@@ -23,7 +23,7 @@ const editLink = async (linkData, token) => {
         }
     }
 
-    const response = await axios.put(API_URL + linkData.id, linkData, config)
+    const response = await axios.put(API_URL, linkData, config)
 
     return response.data
 }

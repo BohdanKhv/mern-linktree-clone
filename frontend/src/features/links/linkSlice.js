@@ -128,8 +128,10 @@ export const linkSlice = createSlice({
             state.isLoading = false
             state.isError = false
             state.isSuccess = true
-            state.links[state.links.findIndex((item) => item._id === action.payload._id)] = action.payload
-            state.links = state.links.sort((a,b) => a.orderKey - b.orderKey)
+            action.payload.length === 1 ?
+                state.links[state.links.findIndex((item) => item._id === action.payload[0]._id)] = action.payload[0]
+            :
+                state.links = action.payload
         })
         .addCase(editLink.rejected, (state, action) => {
             state.isError = true

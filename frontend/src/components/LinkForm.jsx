@@ -40,8 +40,8 @@ export const LinkForm = ({ linkCount, link }) => {
                 orderKey: linkCount,
             }
             if(link) {
-                linkData['id'] = link._id
-                dispatch(editLink(linkData))
+                linkData['_id'] = link._id
+                dispatch(editLink([linkData]))
             } else {
                 dispatch(createLink(linkData))
                 setFormData((prevState) => ({

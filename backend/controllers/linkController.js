@@ -73,28 +73,24 @@ const setLink = asyncHandler(async (req, res) => {
 // @route   PUT /api/links/:id
 // @access  Private
 const updateLink = asyncHandler(async (req, res) => {
-    const link = await Link.findById(req.params.id)
-
-    if(!link) {
-        res.status(400)
-        throw new Error('Link not found')
-    }
-
     // Check for user
     if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
-    // Check if link user matcher logged in user
-    if(link.user.toString() !== req.user.id) {
-        res.status(401)
-        throw new Error('User not authorized')
-    }
+    const promises = req.body.map(async item => {
+        let link = await Link.findByIdAndUpdate(item._id, item)
+        if(!link) {
+            res.status(400)
+            throw new Error('Link not found')
+        }
+    })
 
-    const updatedLink = await Link.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    await Promise.all(promises);
 
-    res.status(200).json(updatedLink)
+    const links = await Link.find({_id: req.body.map((i) => i._id)}).sort({"orderKey": 1}).exec()
+    res.status(200).json(links)
 })
 
 // @desc    Delete link
