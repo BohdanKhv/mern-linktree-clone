@@ -6,7 +6,7 @@ const ShareBtn = ({username}) => {
         const shareData = {
             title: `${username}`,
             text: `Check out ${username} on LinkTree`,
-            url: `http://localhost:3000/${username}`
+            url: `https://link-tree-clone.herokuapp.com/${username}`
         }
         navigator.share(shareData)
     }
