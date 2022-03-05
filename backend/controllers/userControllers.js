@@ -31,6 +31,9 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         username: req.body.username,
         email: req.body.email,
+        viewCount: user.viewCount,
+        pageStyle: user.pageStyle,
+        profileImage: user.profileImage,
         password: hashedPassword
     })
 
@@ -66,6 +69,8 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             username: user.username,
             email: user.email,
+            viewCount: user.viewCount,
+            pageStyle: user.pageStyle,
             profileImage: user.profileImage,
             token: generateToken(user._id)
         })
@@ -121,6 +126,8 @@ const editUser = asyncHandler(async (req, res) => {
             _id: user.id,
             username: user.username,
             email: user.email,
+            viewCount: user.viewCount,
+            pageStyle: user.pageStyle,
             profileImage: user.profileImage,
             token: req.headers.authorization.split(' ')[1]
         })
@@ -130,10 +137,29 @@ const editUser = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Increment Profile View Count
+// @route   GET /api/users/:id/view
+// @access  Public
+const incrementViewCount = asyncHandler(async (req, res) => {
+    const user = await User.findOneAndUpdate({_id: req.params.id}, {$inc : {'viewCount' : 1}}).exec()
+
+    // Check for user
+    if(!user || !req.params.id) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    res.status(200).json({
+        _id: user.id,
+        username: user.username,
+        viewCount: user.viewCount,
+    })
+})
+
 module.exports = {
     registerUser,
     loginUser,
     getAdmin,
     getUser,
-    editUser
+    editUser,
+    incrementViewCount
 }

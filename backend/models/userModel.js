@@ -25,6 +25,11 @@ const userSchema = mongoose.Schema({
         required: false,
         default: ''
     },
+    viewCount: {
+        type: Number,
+        default: 0,
+        required: false
+    },
     pageStyle: {
         backgroudImage: {
             type: String,

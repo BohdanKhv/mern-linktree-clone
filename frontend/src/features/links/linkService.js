@@ -41,7 +41,6 @@ const deleteLink = async (linkId, token) => {
     return response.data
 }
 
-
 // Get user links
 const getLinks = async (username) => {
     const response = await axios.get(API_URL + 'user/' + username)
@@ -49,11 +48,17 @@ const getLinks = async (username) => {
     return response.data
 }
 
+// Increment click count
+export const incrementClickCount = async (id) => {
+    const response = await axios.get(API_URL + 'click/' + id)
+    return response.data
+}
+
 const linkService = {
     createLink,
     getLinks,
     editLink,
-    deleteLink
+    deleteLink,
 }
 
 export default linkService

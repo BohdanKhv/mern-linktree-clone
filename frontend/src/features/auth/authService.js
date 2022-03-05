@@ -46,11 +46,18 @@ const editUser = async (userData, token) => {
     return response.data
 }
 
+// Increment profile view count
+export const incrementViewCount = async (id) => {
+    const response = await axios.get(API_URL + id + '/view')
+    return response.data
+}
+
 const authService = {
     register,
     logout,
     login,
-    editUser
+    editUser,
+    incrementViewCount
 }
 
 export default authService

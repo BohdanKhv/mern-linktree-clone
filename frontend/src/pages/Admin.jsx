@@ -7,6 +7,8 @@ import LinkForm from "../components/LinkForm"
 import AdminLink from "../components/AdminLink"
 import Spinner from '../components/Spinner'
 import ProfileImageForm from "../components/ProfileImageForm"
+import Analytics from "../components/Analytics"
+import '../components/style/adminStyle.css'
 
 const Admin = () => {
 
@@ -73,28 +75,30 @@ const Admin = () => {
         <div className="admin">
             <ProfileImageForm user={user} />
             <LinkForm linkCount={links.length}/>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="droppable">
-                    {(provided, snapshot) => (
-                    <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                    >
-                        <section className="admin-body">
-                            {links && links.map((link, index) => (
-                                <AdminLink 
-                                    key={`Admin-links-${index}`} 
-                                    link={link} 
-                                    index={index}
-                                    isDragging={isDragging}
-                                />
-                            ))}
-                        </section>
-                        {provided.placeholder}
-                    </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+            <div className="admin-links">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="droppable">
+                        {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <section className="admin-body">
+                                {links && links.map((link, index) => (
+                                    <AdminLink 
+                                        key={`Admin-links-${index}`} 
+                                        link={link} 
+                                        index={index}
+                                        isDragging={isDragging}
+                                    />
+                                ))}
+                            </section>
+                            {provided.placeholder}
+                        </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            </div>
         </div>
     )
 }

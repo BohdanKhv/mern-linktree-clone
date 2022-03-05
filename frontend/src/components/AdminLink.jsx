@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import LinkForm from './LinkForm'
 import './style/adminLink.css'
 import { Draggable } from 'react-beautiful-dnd'
+import Analytics from './Analytics'
 
 const AdminLink = ({link, index}) => {
     const [ displayEdit, setDisplayEdit ] = useState(false)
@@ -17,20 +18,19 @@ const AdminLink = ({link, index}) => {
                 style={provided.draggableProps.style}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
-                {...provided.dragHandleProps}
             >
-                
                 <div className='admin-link-container'>
                     <div className={'admin-shadow '+ `${displayEdit ? 'show' : ''}`}>
                         <div className="admin-link-flex">
                             {link.url ? 
                                 <div className="display-link" onClick={() => setDisplayEdit(!displayEdit)}>
-                                        <a>
-                                            <div style={{ backgroundImage: `url("${link.icon}")` }} className="icon"></div>
-                                            <p className="name">
-                                                {link.name}
-                                            </p>
-                                        </a>
+                                    <a>
+                                        <div style={{ backgroundImage: `url("${link.icon}")` }} className="icon"></div>
+                                        <p className="name">
+                                            {link.name}
+                                        </p>
+                                    </a>
+                                    <Analytics data={link.clickCount}/>
                                 </div>
                             :
                                 <div className="display-text" onClick={() => setDisplayEdit(!displayEdit)}>
@@ -39,7 +39,10 @@ const AdminLink = ({link, index}) => {
                                     </p>
                                 </div>
                             }
-                            <div className="sort">
+                            <div 
+                            className="sort"
+                            {...provided.dragHandleProps}
+                            >
                                 <p>||</p>
                             </div>
                         </div>

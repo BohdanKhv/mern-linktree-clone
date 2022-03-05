@@ -68,6 +68,7 @@ const Login = () => {
                 <form onSubmit={onSubmit}>
                     <div className="form-group">
                         <input 
+                            autoComplete="off"
                             type="text" 
                             className="form-control" 
                             id="username"
@@ -78,6 +79,7 @@ const Login = () => {
                     </div>
                     <div className="form-group">
                         <input 
+                            autoComplete="off"
                             type="password" 
                             className="form-control" 
                             id="password"

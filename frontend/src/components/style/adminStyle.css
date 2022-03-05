@@ -1,0 +1,62 @@
+.admin {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+}
+
+.admin .heading {
+    grid-column: 1/11;
+    grid-row: 1;
+}
+
+.admin .analytics {
+    grid-column: 1/11;
+    grid-row: 2;
+}
+
+.admin .form {
+    grid-column: 1/11;
+    grid-row: 3;
+}
+
+.admin-links {
+    grid-column: 1/11;
+    grid-row: 4;
+}
+
+
+.analytics {
+    border-radius: 15px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 10px 5px;
+    z-index: 2;
+    right: 5px;
+    bottom: 0px;
+}
+
+.analytics img {
+    margin-right: 3px;
+    width: 20px;
+    height: 20px;
+
+}
+
+.analytics p {
+    font-size: 13px;
+    color: #000;
+}
+
+.profile-views {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-views img {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}

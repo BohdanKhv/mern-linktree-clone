@@ -69,6 +69,7 @@ const Register = () => {
                             <p>LinkTree.com/</p>
                         </div>
                         <input 
+                            autoComplete="off"
                             type="text" 
                             className="form-control-username" 
                             id="username"
@@ -79,6 +80,7 @@ const Register = () => {
                     </div>
                     <div className="form-group">
                         <input 
+                            autoComplete="off"
                             type="password" 
                             className="form-control" 
                             id="password"

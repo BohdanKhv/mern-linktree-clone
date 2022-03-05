@@ -41,6 +41,7 @@ export const LinkForm = ({ linkCount, link }) => {
             }
             if(link) {
                 linkData['_id'] = link._id
+                linkData['clickCount'] = 0
                 dispatch(editLink([linkData]))
             } else {
                 dispatch(createLink(linkData))
@@ -68,14 +69,14 @@ export const LinkForm = ({ linkCount, link }) => {
         <section className="form">
             <form onSubmit={onSubmit}>
                 <div className="form-row">
-                    <div className="form-group form-w-25">
+                    <div className="form-group">
                         <label htmlFor="text">Type</label>
                         <select name="type" id="type" value={type} onChange={onChange}>
                             <option value="url">URL</option>
                             <option value="text">Text</option>
                         </select>
                     </div>
-                    <div className="form-group form-w-75">
+                    <div className="form-group">
                         <label htmlFor="text">Name</label>
                         <input 
                             autoComplete="off"
@@ -91,7 +92,7 @@ export const LinkForm = ({ linkCount, link }) => {
                 {type === 'url' &&
                 <>
                     <div className="form-row">
-                        <div className="form-group form-w-25">
+                        <div className="form-group">
                             <label htmlFor="text">Icon</label>
                             <div className="btn-icon" onClick={() => {setDisplayIconSelect(true)}}>
                                 {iconValue !== '' ? 
@@ -101,7 +102,7 @@ export const LinkForm = ({ linkCount, link }) => {
                                 }
                             </div>
                         </div>
-                        <div className="form-group form-w-75">
+                        <div className="form-group">
                             <label htmlFor="text">URL</label>
                             <input 
                                 autoComplete="off"
@@ -118,12 +119,12 @@ export const LinkForm = ({ linkCount, link }) => {
                 }
                 {link ? 
                     <div className="form-row">
-                        <div className="form-group form-w-25">
+                        <div className="form-group">
                             <div className="form-group">
                                 <a onClick={() => dispatch(deleteLink(link._id))} className="btn btn-danger">Delete</a>
                             </div>
                         </div>
-                        <div className="form-group form-w-75">
+                        <div className="form-group">
                             <div className="form-group">
                                 <input type="submit" className="btn btn-warning" value={`Edit ${type}`} />
                             </div>

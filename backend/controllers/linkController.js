@@ -2,6 +2,20 @@ const asyncHandler = require('express-async-handler')
 const Link = require('../models/linkModel')
 const User = require('../models/userModel')
 
+// @desc    Update click count
+// @route   Get /api/links/click/:id
+// @access  Public
+const clickLink = asyncHandler(async (req, res) => {
+    const link = await Link.findOneAndUpdate({_id: req.params.id}, {$inc : {'clickCount' : 1}}).exec()
+
+    if (!link) {
+        res.status(400)
+        throw Error('Link not found')
+    }
+
+    res.status(200).json(link)
+})
+
 // @desc    Get all links for user
 // @route   GET /api/links/user/:id
 // @access  Public
@@ -124,6 +138,7 @@ const deleteLink = asyncHandler(async (req, res) => {
 module.exports = {
     getLink,
     getUserLinks,
+    clickLink,
     setLink,
     updateLink,
     deleteLink,

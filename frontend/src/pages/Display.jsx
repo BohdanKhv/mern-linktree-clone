@@ -1,4 +1,4 @@
-import { useEffect } from "react" 
+import { useEffect, useState } from "react" 
 import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
@@ -8,14 +8,28 @@ import Spinner from '../components/Spinner'
 import ShareBtn from '../components/ShareBtn'
 import LinkBtn from '../components/LinkBtn'
 import { toast } from "react-toastify"
+import { incrementViewCount } from '../features/auth/authService'
 
 const Dashboard = () => {
 
     const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()
+    const [ isIncrementedViewCount, setIsIncrementedViewCount ] = useState(false)
     const { user, isError, message } = useSelector((state) => state.profile )
+    const { auth } = useSelector((state) => state)
     const { links, isLoading } = useSelector((state) => state.links )
+
+    useEffect(() => {
+        if(!auth.user && user) {
+            setTimeout(() => {
+                if(!isIncrementedViewCount){
+                    incrementViewCount(user._id)
+                    setIsIncrementedViewCount(true)
+                }
+            }, 3000)
+        }
+    }, [user])
 
     useEffect(() => {
         if(!params.id) {
@@ -41,7 +55,7 @@ const Dashboard = () => {
 
     return (
         <>
-        <section className='display heading'>
+            <section className='display heading'>
                 <div className="profile">
                     <div className="username-img-container">
                         {user && user.username && <ShareBtn username={user.username} /> }

@@ -1,9 +1,16 @@
+import { incrementClickCount } from '../features/links/linkService'
+
 const LinkBtn = ({link}) => {
+    
+    const clickCount = (id) => {
+        incrementClickCount(id)
+    }
+
     return (
         <>
             {link.url ? 
                 <div className="display-link">
-                        <a href={link.url} target="_blank">
+                        <a onClick={() => clickCount(link._id)} href={link.url} target="_blank">
                             <div style={{ backgroundImage: `url("${link.icon}")` }} className="icon"></div>
                             <p className="name">
                                 {link.name}
