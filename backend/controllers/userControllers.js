@@ -30,10 +30,6 @@ const registerUser = asyncHandler(async (req, res) => {
     // Create user
     const user = await User.create({
         username: req.body.username,
-        email: req.body.email,
-        viewCount: user.viewCount,
-        pageStyle: user.pageStyle,
-        profileImage: user.profileImage,
         password: hashedPassword
     })
 
@@ -42,6 +38,9 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             username: user.username,
             email: user.email,
+            viewCount: user.viewCount,
+            pageStyle: user.pageStyle,
+            profileImage: user.profileImage,
             token: generateToken(user._id)
         })
     } else {
