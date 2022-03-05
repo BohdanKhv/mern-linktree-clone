@@ -15,5 +15,5 @@ JWT_TOKEN = your jwt tocken
 ```npm run client```
 
 Live example: 
-Login: - https://link-tree-clone.herokuapp.com/login
-Display: - https://link-tree-clone.herokuapp.com/spaceguy
+- Login: https://link-tree-clone.herokuapp.com/login
+- Display: https://link-tree-clone.herokuapp.com/spaceguy
