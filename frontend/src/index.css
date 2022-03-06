@@ -179,6 +179,8 @@ h3 {
   font-family: inherit;
   font-size: 1rem;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
 }
 
 .form-group label {
@@ -213,6 +215,8 @@ h3 {
   height: 47px;
   transition: 0.3s;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
 }
 
 .form-group-username {
@@ -223,6 +227,8 @@ h3 {
   display: flex;
   overflow: hidden;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
 }
 
 .form-group-username:focus-within {
@@ -264,6 +270,8 @@ h3 {
   justify-content: center;
   transition: 0.3s;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
 }
 
 .btn-danger {
@@ -336,6 +344,8 @@ h3 {
   cursor: pointer;
   position: relative;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
   margin: 25px auto;
 }
 
@@ -435,6 +445,8 @@ h3 {
   justify-content: center;
   align-items: center;
   box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
 }
 
 .profile .username-img-bg small {

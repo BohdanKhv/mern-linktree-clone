@@ -7,6 +7,8 @@
 
 .admin-shadow {
     box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    -webkit-box-shadow: var(--box-shadow);
     background-color: #e6e6e6;
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
