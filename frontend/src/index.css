@@ -60,6 +60,12 @@ h3 {
   margin-right: 20px;
 }
 
+
+.header ul.left li.logo img {
+  width: 20px;
+  padding-right: 5px;
+}
+
 .header ul.left li.logo a {
   font-size: 1.2rem;
   font-weight: 600;
@@ -304,6 +310,26 @@ h3 {
   transform: scale(0.98);
 }
 
+footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  width: 30px;
+  margin-right: 15px;
+}
+
+footer a {
+  font-size: 1.2rem;
+
+}
+
+
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
@@ -501,6 +527,14 @@ h3 {
 
   .heading h1 {
     font-size: 1.6rem;
+  }
+
+  .header ul.left li a {
+    font-size: 0.8rem;
+  }
+
+  .header ul.left li.logo a {
+    font-size: 1rem;
   }
 
   .heading p {

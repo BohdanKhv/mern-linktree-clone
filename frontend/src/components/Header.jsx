@@ -22,7 +22,10 @@ const Header = () => {
                     <div>
                         <ul className='left'>
                             <li className='logo'>
-                                <Link to={`/${user ? user.username : ''}`}>LinkTree</Link>
+                                <Link to={`/${user ? user.username : ''}`}>
+                                    <img src="/logo192sm.png" alt="Small logo" />
+                                    Tree
+                                </Link>
                             </li>
                             {user &&
                                 <li>

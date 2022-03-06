@@ -82,6 +82,14 @@ const Dashboard = () => {
                     </h6>
                 }
             </section>
+            {!auth.user &&
+                <footer>
+                    <img src="/logo192sm.png" alt="Small logo" />
+                    <Link to="/register">
+                        Get Your <strong>LinkTree</strong>
+                    </Link>
+                </footer>
+            }
         </>
     )
 }
